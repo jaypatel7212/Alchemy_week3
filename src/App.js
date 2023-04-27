@@ -1,6 +1,5 @@
 import { Alchemy, Network } from "alchemy-sdk";
 import { useEffect, useState, useRef } from "react";
-import logo from "./logo.svg";
 import Result from "./Result";
 import "./App.css";
 
@@ -112,14 +111,6 @@ function App() {
     let searchedBlockNumber = parseInt(blockData.number, 16);
     const getStatus = () => {
       let diff = lastestBlockNumber - searchedBlockNumber;
-
-      if (diff >= 96) {
-        return "Finalized";
-      } else if (diff >= 12) {
-        return "Unfinalized (Safe)";
-      } else {
-        return "Unfinalized";
-      }
     };
 
     let gasLimit = parseInt(blockData.gasLimit, 16);
@@ -130,7 +121,7 @@ function App() {
       return `${gasUsed} (${ratio}%)`;
     };
 
-    let burntFees = `🔥 ${
+    let burntFees = ` ${
       (parseInt(blockData.gasUsed, 16) *
         parseInt(blockData.baseFeePerGas, 16)) /
       Math.pow(10, 18)
@@ -173,7 +164,6 @@ function App() {
         <div className="flex flex-col items-center">
           <div className="mt-20 block w-3/4 rounded-lg border-2 border-gray-500/75 bg-neutral-800 p-6 shadow-md shadow-gray-300 md:mt-10 xl:w-1/2">
             <div className="mb-8 flex flex-row gap-1">
-              <img src={logo} />
               <p className="cursor-default text-left text-3xl text-blue-300">
                 Block explorer
               </p>
